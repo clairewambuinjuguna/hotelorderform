@@ -7,9 +7,14 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        background-color: #e0f7f0;
+        background: rgb(63, 94, 251);
+        background: linear-gradient(
+          90deg,
+          rgba(63, 94, 251, 1) 0%,
+          rgba(70, 252, 210, 0.9) 100%
+        );
         margin: 0;
-        display: flex;
+        display: block;
         justify-content: center;
         align-items: center;
         height: 100vh;
@@ -21,7 +26,6 @@
         background-color: #fff;
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
 
       label {
@@ -38,57 +42,150 @@
         border-radius: 4px;
       }
 
-      input[type="submit"] {
+      button {
         background-color: #4caf50;
         color: #fff;
         cursor: pointer;
+        margin: 0 auto;
+        border-radius: 25px;
+        border: #ccc;
+        display: block;
+
+        font-size: 16px;
+        line-height: 30px;
+        padding: 16px 24px;
+        text-decoration: none;
+        transition: all 200ms ease;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+      }
+      button:hover {
+        opacity: 0.8;
       }
 
-      /* Responsive Styles */
       @media only screen and (min-width: 600px) {
         form {
           max-width: 600px;
         }
       }
+
+      .custom-popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        color: #4caf50;
+      }
+      .foodImage {
+        width: 700px;
+        border-radius: 8px;
+      }
+      .form-container {
+        display: flex;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+      }
+      p {
+        margin: 0 auto;
+        line-height: 20px;
+      }
+      .footerItems {
+        text-align: center;
+      }
+
+      .emailIcon {
+        display: inline-block;
+
+        width: 30px;
+        height: auto; /* Maintain aspect ratio */
+
+        border-radius: 50%;
+      }
+
+      .footerItems p {
+        display: inline-block;
+        margin: 0; /* Remove default margin for the paragraph */
+      }
+
+      .codedBy {
+        display: block;
+        margin-top: 10px; /* Add some space between the link and the "coded by" text */
+      }
+      a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        font-size: medium;
+      }
+      a:hover {
+        text-decoration: underline;
+        opacity: 0.7;
+      }
     </style>
   </head>
   <body>
-    <form id="orderForm">
-      <h1>Sweet Delicacies Hotel Order Form</h1>
-      <label for="productName">Product Name:</label>
-      <input type="text" id="productName" name="productName" required />
+    <div class="form-container">
+      <form id="orderForm">
+        <h1>Sweet Delicacies Hotel Order Form</h1>
+        <h2><em>Enjoy your Meal 🍲</em></h2>
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" name="productName" required />
 
-      <label for="quantity">Quantity:</label>
-      <input type="number" id="quantity" name="quantity" required />
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" required />
 
-      <label for="customerName">Your Name:</label>
-      <input type="text" id="customerName" name="customerName" required />
+        <label for="customerName">Your Name:</label>
+        <input type="text" id="customerName" name="customerName" required />
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required />
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+      </form>
+      <img
+        class="foodImage"
+        src="https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?t=st=1709191526~exp=1709195126~hmac=c814af96ae1376bf870a22d7394d414a5ed823d0d00f9b43ecef80e8a8e292bb&w=900"
+      />
+    </div>
+    <br />
 
-      <input type="submit" value="Submit Order" />
-    </form>
+    <button>Submit Order</button>
+    <hr />
+
+    <footer class="footerItems">
+      <img
+        class="emailIcon"
+        src="https://img.freepik.com/free-vector/open-email-envelope_1020-530.jpg?t=st=1709209269~exp=1709212869~hmac=a6bd08ac89e5d0e27b2d67777904c2ba58d3c10af86ce60312d68e4d6fa75d0d&w=740"
+      />
+      <p>
+        <a href="mailto:clairenjugunaw@gmail.com">clairenjugunaw@gmail.com</a>
+      </p>
+      <span class="codedBy">coded by <strong>claire Njuguna</strong></span>
+    </footer>
 
     <script>
-      document
-        .getElementById("orderForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
+      function submitOrder() {
+        let productName = document.getElementById("productName").value;
+        let quantity = document.getElementById("quantity").value;
+        let customerName = document.getElementById("customerName").value;
+        let email = document.getElementById("email").value;
 
-          // Get form data
-          const productName = document.getElementById("productName").value;
-          const quantity = document.getElementById("quantity").value;
-          const customerName = document.getElementById("customerName").value;
-          const email = document.getElementById("email").value;
+        // Prompt to confirm the order
+        let userConfirmation = confirm(
+          `Confirm your order:\n\nProduct: ${productName}\nQuantity: ${quantity}\nCustomer: ${customerName}\nEmail: ${email}`
+        );
 
-          // Customize the message For every customer
-          const message = `
-                Thank you, ${customerName}!
-                Your order for ${quantity} ${productName}(s) has been placed.
-                We will send order details to ${email}.
-                Have a great day!
-            `;
+        if (userConfirmation) {
+          const message = generateMessage(
+            productName,
+            quantity,
+            customerName,
+            email
+          );
 
           // Create a custom modal-like popup
           const popup = document.createElement("div");
@@ -99,8 +196,22 @@
           // Close the popup after 3 seconds (3000 milliseconds)
           setTimeout(() => {
             document.body.removeChild(popup);
-          }, 3000);
-        });
+          }, 5000);
+        } else {
+          alert("Order canceled. Feel free to make changes and submit again.");
+        }
+      }
+
+      function generateMessage(product, quantity, customer, userEmail) {
+        return `
+        Thank you, ${customer}!
+        Your order for ${quantity} ${product}(s) has been placed.
+        We will send order details to ${userEmail}.
+        Have a great day!
+      `;
+      }
+      let submitButton = document.querySelector("button");
+      submitButton.addEventListener("click", submitOrder);
     </script>
   </body>
 </html>
